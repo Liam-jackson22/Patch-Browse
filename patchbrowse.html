@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PatchBrowse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom right, #fefcea, #e0f7fa);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background-color: #ffd1dc;
+      padding: 1em;
+      text-align: center;
+      font-size: 2em;
+      color: #333;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    #main {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    #sidebar {
+      width: 350px;
+      background-color: #fff0f5;
+      padding: 1em;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+      overflow-y: auto;
+    }
+
+    #content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #searchBar {
+      display: flex;
+      padding: 1em;
+      background-color: #fff0f5;
+      justify-content: center;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      width: 60%;
+      padding: 0.8em;
+      font-size: 1em;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      font-family: 'Comic Sans MS', cursive;
+    }
+
+    button {
+      padding: 0.8em 1.2em;
+      margin-left: 1em;
+      font-size: 1em;
+      border-radius: 10px;
+      border: none;
+      background-color: #66ccff;
+      color: white;
+      cursor: pointer;
+      font-family: 'Comic Sans MS', cursive;
+    }
+
+    iframe {
+      flex: 1;
+      border: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 0.5em;
+      font-size: 0.9em;
+      color: #666;
+      background-color: #fff0f5;
+    }
+  </style>
+</head>
+<body>
+  <header>🌟 PatchBrowse</header>
+
+  <div id="main">
+    <div id="sidebar">
+      <h2>🤖 PatchSearch AI</h2>
+      <p><em>Ask anything, explore joyfully!</em></p>
+      <div id="deployment-0e2e26e8-4dc4-40ed-b8a0-8a5276dce1d1"></div>
+      <script src="https://studio.pickaxe.co/api/embed/bundle.js" defer></script>
+    </div>
+
+    <div id="content">
+      <div id="searchBar">
+        <input type="text" id="queryInput" placeholder="Type a site or question..." />
+        <button onclick="loadQuery()">Go</button>
+      </div>
+      <iframe id="browserFrame" src="patchsearch.html" title="PatchSearch"></iframe>
+    </div>
+  </div>
+
+  <footer>
+    Made with ❤️ by Liam | Comic Sans forever
+  </footer>
+
+  <script>
+    function loadQuery() {
+      const input = document.getElementById('queryInput').value.trim();
+      const frame = document.getElementById('browserFrame');
+
+      if (input.startsWith('http://') || input.startsWith('https://')) {
+        frame.src = input;
+      } else if (input.includes('.')) {
+        frame.src = 'https://' + input;
+      } else {
+        frame.src = `https://patchsearch.ai/search?q=${encodeURIComponent(input)}`;
+      }
+    }
+  </script>
+</body>
+</html>
